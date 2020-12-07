@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   include: [
             {
               model: Product,
-              attributes: ['id','product_name','price', 'stock', 'catagory_id'],
+              attributes: ['id','product_name','price', 'stock', 'category_id'],
               through: ProductTag,
               as: 'tagged_products'
             }
@@ -33,7 +33,7 @@ router.get('/:id', (req, res) => {
     include: [
       {
         model: Product,
-        attributes: ['id','product_name','price', 'stock', 'catagory_id'],
+        attributes: ['id','product_name','price', 'stock', 'category_id'],
         through: ProductTag,
         as: 'tagged_products'
       }
@@ -56,8 +56,8 @@ router.post('/', (req, res) => {
   // create a new tag
   Tag.create(req.body)
     .then((tag) => {      
-      // if there's product tags, we need to create pairings to bulk create in the ProductTag model
-    if (req.body.tag_id.length) {
+      // if there's products, we need to create pairings to bulk create in the ProductTag model
+    if (req.body.product_id.length) {
       const productTagIdArr = req.body.product_id.map((product_id) => {
         return {
           tag_id: tag.id,
@@ -67,7 +67,7 @@ router.post('/', (req, res) => {
       return ProductTag.bulkCreate(productTagIdArr);
     }
     // if no product tags, just respond
-    res.status(200).json(product);
+    res.status(200).json(tag);
   })
   .then((productTagIds) => res.status(200).json(productTagIds))
   .catch((err) => {
@@ -124,12 +124,13 @@ router.delete('/:id', (req, res) => {
       id: req.params.id
     }
   })
-  .then(dbTagData => {
-    if (!dbTagData) {
+  .then(tags => {
+    if (!tags) {
       res.status(404).json({ message: 'no tag found with this id' });
       return;
     }
-    res.json(dbTagData);
+    console.log(tags);
+    res.json(tags);
   })
   .catch(err => {
     console.log(err);

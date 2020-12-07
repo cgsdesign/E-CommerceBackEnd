@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Product, Category, Tag, ProductTag } = require('../../models');
-const { where } = require('sequelize/types');
+//const { where } = require('sequelize/types');
 
 // The `/api/products` endpoint
 
@@ -53,8 +53,8 @@ router.get('/:id', (req, res) => {
             ]
     })
     .then(dbTagData => {
-      if (!dbUserData) {
-        res.status(404).json({ message: 'No user found with this id' });
+      if (!dbTagData) {
+        res.status(404).json({ message: 'No product found with this id' });
         return;
       }
       res.json(dbTagData);
@@ -141,17 +141,18 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
-  Tag.destroy({
+  Product.destroy({
     where: {
       id: req.params.id
     }
   })
-  .then(dbTagData => {
-    if (!dbTagData) {
-      res.status(404).json({ message: 'no tag found with this id' });
+  .then(products => {
+    if (!products) {
+      res.status(404).json({ message: 'no product found with this id' });
       return;
     }
-    res.json(dbTagData);
+      console.log(products);
+      res.json(products);
   })
   .catch(err => {
     console.log(err);
