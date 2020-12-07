@@ -3,19 +3,12 @@
 
 ## Description 
 
-For this project I worked in JS using Node.js to create a deployment ready HTML file to display drop teams based off of command line inputs. This project utilized Jest testing and  OOP structuring, as well as inquire for prompting user feedback.
+For this project I worked in Sequalize using Node.js to create a the vackend for an ecomerse website including routs for categories,products, and tags to get, edit, create, and destroy.
 
 ## Key Features
-* responsive design
-* fully command line driven 
-* manager, engineer, and intern employee data prompted using inquire
-* name, email, id, and job specific data prompted and collected
-* appropriate data including emails and URLs linked on generated HTML page
-* Jest proofs in case of future changes provided for key objects
-* OOP structuring centered on employee data
 
 ## Installation
-Download files from [this github repo](https://github.com/cgsdesign/TeamProfileGenerator). Then, in your command line, go into the main README-Gen folder and type node index.js. The file will automatically run.
+Download files from [this github repo](https://github.com/cgsdesign/E-CommerceBackEnd). Follow instructional videos to start.
 
 ## Usage
 To view a walkthough on how to use the app, click below for a video walkthough. 
